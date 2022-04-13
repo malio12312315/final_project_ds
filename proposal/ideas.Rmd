@@ -7,12 +7,13 @@ output: html_notebook
 
 ## Section 1. Introduction
 
-Include a brief **introduction or motivation** here
+I was planning on using a different data set from IMBD because I wanted to do my project on movies but while forking the repo I found that a movie data set was already with it so if possible I'd like to use that. 
+Original intro: I plan on using multiple datasets from IMDB, specifically : title.basics.tsv.gz, title.ratings.tsv.gz, title,crew.tsv.gz
 
 ## Section 2. Data Analysis Plan
 
-List any **initial questions** you plan to explore in this project. 
+My plan is to use this dataset to figure why certain movies just do better than others whether its based on genre, who directed it, the big name actors in the movie, just what made this movie so successful
 
 ## Section 3. Data
 
-Include a brief **description of your dataset** (source, available attributes, format, etc.)
+This data set has year, actors, director, name, year it came out, and a short description of the movie.
