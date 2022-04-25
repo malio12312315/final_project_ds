@@ -1,0 +1,65 @@
+---
+title: "Data Science Final"
+output: html_notebook
+---
+
+Malio Mayo
+4/21/2022
+
+Loading Packages:
+```{r}
+library(tidyverse)
+library(ggplot2)
+library (readr)
+
+urlfile="https://raw.githubusercontent.com/reisanar/datasets/master/IMDB_movies.csv"
+
+IMDB<-read_csv(url(urlfile))
+```
+
+Data set:
+```{r}
+IMDB
+```
+
+Goal:
+An anaylsis on Movies through IMDB
+
+Arrange the data in descending order based off the year:
+```{r}
+IMDB %>%
+  arrange(desc(Year))
+```
+
+Year with most and least releases:
+```{r}
+IMDB %>%
+  group_by(Year)%>%
+  summarize(Total = n())%>%
+  
+ggplot() +
+  geom_col(aes(x=Year, y = Total))
+```
+
+Movies with lowest ratings
+```{r}
+IMDB %>%
+  na.omit()%>%
+  select(Title,Genre,Director,Rating)%>%
+  arrange(Rating)%>%
+  unique()
+
+
+```
+
+
+Movies with highest ratings
+```{r}
+IMDB %>%
+  na.omit()%>%
+  select(Title,Genre,Director,Rating)%>%
+  arrange(desc(Rating))%>%
+  unique()
+```
+
+
