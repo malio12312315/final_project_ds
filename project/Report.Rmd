@@ -1,0 +1,159 @@
+---
+title: "Data Science Final Project"
+Authors: "Malio Mayo"
+output: 
+  html_document:
+    toc: true
+    toc_float: true
+    theme: united
+    highlight: tango
+editor_options: 
+  markdown: 
+    wrap: sentence
+---
+
+# An Analysis of Movies from 2006-2016
+
+## Team
+
+-   **Malio Mayo**
+
+### Introduction
+
+Movies have been a pivotal part of most people's lives, whether it was a movie you saw as a kid that changed your view on the world, or a movie about a funny dinosaur that just made you laugh.
+Everyone loves a good movie, but what about the movie made it so great?
+
+Asking the data these questions:
+
+-   Year with the most releases
+
+-   What movies did the best in this time period?
+    Who directed them?
+
+-   What movies did the worst in this time period?
+    Who directed them?
+
+-   How does IMDb's rank of the movie for this segment of time compare to the rating?
+
+To answer these questions:
+
+-   Does Genre affect how the movie does?
+
+-   Who (Director) makes the best movies?
+
+-   Who (Director) makes the worst movies?
+
+-   What was the Best rated movie of 2006-2016 based on the data?
+
+-   What was the Worst rated movie of 2006-2016 based on the data?
+
+### Prerequisites
+
+```{r}
+library(tidyverse)
+library(ggplot2)
+library (readr)
+```
+
+### Dataset
+
+```{r}
+
+urlfile="https://raw.githubusercontent.com/reisanar/datasets/master/IMDB_movies.csv"
+
+IMDB<-read_csv(url(urlfile))
+IMDB
+```
+
+### Data Analysis
+
+#### Year with the most releases:
+
+```{r}
+IMDB %>%
+  group_by(Year)%>%
+  summarize(Total = n())%>%
+  
+ggplot() +
+  geom_col(aes(x=Year, y = Total))
+```
+
+2016 had the most releases in this decade span of time.
+
+#### Movies with the lowest ratings:
+
+```{r}
+IMDB %>%
+  na.omit()%>%
+  select(Title,Genre,Director,Rating)%>%
+  arrange(Rating)%>%
+  unique()
+```
+
+The worst movie made in the 2006-2016 Decade was Disaster Movie, Directed by Jason Friedberg and received a rating of 1.9.
+
+#### Movies with the Best Ratings:
+
+```{r}
+IMDB %>%
+  na.omit()%>%
+  select(Title,Genre,Director,Rating)%>%
+  arrange(desc(Rating))%>%
+  unique()
+```
+
+The Dark Knight was the highest rated movie in the 2006-2016 Time Span, its Director was Christopher Nolan and received a 9.0 rating.
+
+#### Comparing IMDb's Ranking to the Ratings
+
+```{r}
+IMDB %>%
+  na.omit()%>%
+  select(Title,Rank,Rating)%>%
+  arrange((Rank))%>%
+  unique()
+```
+
+The IMDb ranking system puts Guardians of the Galaxy as the number one movie with a rating of 8.1.
+
+### Answering our Questions
+
+The questions:
+
+-   Does Genre affect how the movie does?
+
+-   Who (Director) makes the best movies?
+
+-   Who (Director) makes the worst movies?
+
+-   What was the Best rated movie of 2006-2016 based on the data?
+
+-   What was the Worst rated movie of 2006-2016 based on the data?
+
+#### Does Genre affect how the movie does?
+
+According to the data, It does.
+Most of the movies in the top 20 have at least one of these listed as a genre: Action, Drama or Adventure.
+Which leads me to the conclusion that a movie that qualifies as an Action, Drama or Adventure movie will do better at the box office than other movies.
+
+#### Who makes the best movies?
+
+In the top 10 movies listed in the data, Christopher Nolan directed 5 of them.
+I think its safe to say that for the 2006-2016 Time Span, Christopher Nolan was the best Director.
+
+#### Who makes the worst movies?
+
+In the worst 50 movies rated in the 2006-2016 period, M.
+Night Shyamalan and Rob Cohen made 2 movies in the 50 worst rated movies, I would call that a tie for who made the worst movies in the 2006-2016 period.
+
+#### What was the best rated movie in the 2006-2016 Time Span?
+
+The best rated movie in the 2006-2016 Time Span was The Dark Night, Directed by Christopher Nolan, and was given a rating of 9.0.
+
+#### What was the worst rated movie in the 2006-2016 Time Span?
+
+The worst rated movie in the 2006-2016 Time Span was Disaster Movie, Directed by Jason Friedberg, and was given a rating of 1.9.
+
+### Conclusion
+
+In conclusion, Christopher Nolan makes the best movies and Genre does matter in order for the movie to succeed.
