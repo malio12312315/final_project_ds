@@ -1,6 +1,8 @@
 ---
 title: "Data Science Final"
-output: html_notebook
+output:
+  html_document:
+    df_print: paged
 ---
 
 Malio Mayo
@@ -59,6 +61,15 @@ IMDB %>%
   na.omit()%>%
   select(Title,Genre,Director,Rating)%>%
   arrange(desc(Rating))%>%
+  unique()
+```
+
+IMDb's Ranking compared to the Ratings:
+```{r}
+IMDB %>%
+  na.omit()%>%
+  select(Title,Rank,Rating)%>%
+  arrange((Rank))%>%
   unique()
 ```
 
